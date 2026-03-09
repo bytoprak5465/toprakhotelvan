@@ -1,0 +1,2119 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; width: 100%; height: 100%; -webkit-text-size-adjust: 100%; }
+body { width: 100%; min-width: 0; overflow-x: hidden; }
+
+/* ========== Admin tema (gece / gündüz) ========== */
+body { font-family: 'Outfit', system-ui, sans-serif; min-height: 100vh; transition: background 0.35s ease, color 0.3s ease; }
+body, body[data-admin-theme="light"] {
+  --admin-bg: #f0f2f5;
+  --admin-card: #ffffff;
+  --admin-card-border: #e8eaed;
+  --admin-text: #1a1a1a;
+  --admin-text-muted: #64748b;
+  --admin-input-bg: #fff;
+  --admin-input-border: #e2e8f0;
+  --admin-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  --admin-shadow-hover: 0 12px 32px rgba(0,0,0,0.1);
+  --admin-accent: #b8860b;
+  --admin-accent-hover: #d4a017;
+  --admin-accent-subtle: rgba(184,134,11,0.1);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+body[data-admin-theme="dark"] {
+  --admin-bg: #0f1419;
+  --admin-card: #1a2332;
+  --admin-card-border: #2d3a4f;
+  --admin-text: #e8eaed;
+  --admin-text-muted: #94a3b8;
+  --admin-input-bg: #1e293b;
+  --admin-input-border: #334155;
+  --admin-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --admin-shadow-hover: 0 12px 32px rgba(0,0,0,0.4);
+  --admin-accent: #d4a017;
+  --admin-accent-hover: #e6b82e;
+  --admin-accent-subtle: rgba(212,160,23,0.15);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+}
+
+/* ========== Login sayfası – görsel tasarım (koyu teal, turuncu buton) ========== */
+.admin-login {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+  padding: max(1.5rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  box-sizing: border-box;
+}
+/* Arka plan: lacivert gradient + cam küreler */
+.admin-login-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #2c3d5c 0%, #1e3354 50%, #152a45 100%);
+  z-index: 0;
+  overflow: hidden;
+}
+.admin-login-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 150, 220, 0.35), rgba(50, 90, 160, 0.18));
+  filter: blur(40px);
+  pointer-events: none;
+}
+.admin-login-bubble-1 { width: 280px; height: 280px; left: 5%; top: 10%; }
+.admin-login-bubble-2 { width: 180px; height: 180px; left: 70%; top: 15%; }
+.admin-login-bubble-3 { width: 220px; height: 220px; right: 10%; top: 50%; }
+.admin-login-bubble-4 { width: 160px; height: 160px; left: 15%; bottom: 25%; }
+.admin-login-bubble-5 { width: 320px; height: 320px; left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.5; }
+.admin-login-bubble-6 { width: 120px; height: 120px; right: 25%; bottom: 15%; }
+.admin-login-bubble-7 { width: 200px; height: 200px; left: 40%; top: 5%; }
+.admin-login-bubble-8 { width: 140px; height: 140px; right: 5%; bottom: 40%; }
+
+/* Üst başlık – ortada, animasyonlu */
+.admin-login-title {
+  position: absolute;
+  top: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  animation: adminTitleIn 0.8s ease-out forwards, adminTitleGlow 3s ease-in-out 0.8s infinite;
+}
+@keyframes adminTitleIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@keyframes adminTitleGlow {
+  0%, 100% { text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25), 0 0 30px rgba(255, 255, 255, 0.08); }
+  50% { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.15); }
+}
+
+@media (max-width: 480px) {
+  .admin-login-title {
+    font-size: 1.35rem;
+    top: 1.75rem;
+    white-space: normal;
+    padding: 0 1rem;
+  }
+}
+
+/* Form: glassmorphism */
+.admin-login-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  max-width: 380px;
+  width: calc(100% - 3rem);
+  box-sizing: border-box;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.admin-anim-in {
+  animation: adminLoginIn 0.5s ease-out forwards;
+}
+@keyframes adminLoginIn {
+  from { opacity: 0; transform: translate(-50%, -50%) translateY(20px); }
+  to { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+}
+
+/* Üst çizgi + avatar dairesi */
+.admin-login-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+}
+.admin-login-line {
+  flex: 1;
+  height: 1px;
+  background: #fff;
+  max-width: 80px;
+}
+.admin-login-avatar {
+  width: 56px;
+  height: 56px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0 0.5rem;
+}
+.admin-login-avatar-icon {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+/* Input alanları – cam formda okunaklı */
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.admin-login-field {
+  display: flex;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.admin-login-field-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: #2c5282;
+  flex-shrink: 0;
+}
+.admin-login-field-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #2c5282;
+}
+.admin-login-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.95rem 1rem 0.95rem 0;
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+.admin-login-field input::placeholder {
+  color: #7a7a8c;
+}
+.admin-login-field input:focus {
+  outline: none;
+}
+.admin-login-field .password-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.admin-login-field .password-wrap input {
+  padding-right: 2.75rem;
+}
+.admin-login-field .password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #2c5282;
+  border-radius: 6px;
+}
+.admin-login-field .password-toggle:hover {
+  background: rgba(44, 82, 130, 0.12);
+}
+.form-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin: -0.25rem 0 0;
+}
+
+/* Login butonu – turuncu */
+.admin-login-btn {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4a7ab8 0%, #2c5282 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(44, 82, 130, 0.45);
+}
+.admin-login-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(44, 82, 130, 0.55);
+}
+
+/* Footer: Remember me + Forgot password */
+.admin-login-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.admin-login-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+}
+.admin-login-remember .admin-login-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.admin-login-checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.admin-login-remember .admin-login-checkbox:checked + .admin-login-checkbox-custom {
+  background: rgba(255,255,255,0.2);
+}
+.admin-login-remember .admin-login-checkbox:checked + .admin-login-checkbox-custom::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin: -2px 0 0 2px;
+}
+.admin-login-remember .admin-login-checkbox:focus-visible + .admin-login-checkbox-custom {
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+}
+.admin-login-forgot {
+  font-size: 0.95rem;
+  color: #fff;
+  text-decoration: none;
+}
+.admin-login-forgot:hover {
+  text-decoration: underline;
+}
+.admin-login-footer-line {
+  margin-top: 1.5rem;
+  height: 1px;
+  background: #fff;
+  max-width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.8;
+}
+
+/* Login – mobil uyumlu */
+@media (max-width: 480px) {
+  .admin-login {
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .admin-login-box {
+    width: 100%;
+    max-width: none;
+    padding: 1.5rem 1.25rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .admin-anim-in {
+    animation: adminLoginIn 0.5s ease-out forwards;
+  }
+  @keyframes adminLoginIn {
+    from { opacity: 0; transform: translate(-50%, -50%) translateY(20px); }
+    to { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+  }
+  .admin-login-avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .admin-login-avatar-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .admin-login-header {
+    margin-bottom: 1.5rem;
+  }
+  .admin-login-form {
+    gap: 0.875rem;
+  }
+  .admin-login-field input,
+  .admin-login-field .password-wrap input {
+    padding: 0.875rem 1rem 0.875rem 0;
+    font-size: 16px; /* iOS zoom önleme */
+  }
+  .admin-login-field .password-wrap input {
+    padding-right: 2.5rem;
+  }
+  .admin-login-btn {
+    padding: 1rem;
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .admin-login-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .admin-login-forgot {
+    align-self: flex-start;
+  }
+}
+
+/* ========== Butonlar ========== */
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-primary { background: linear-gradient(135deg, var(--admin-accent) 0%, var(--admin-accent-hover) 100%); color: #fff; border: none; box-shadow: 0 2px 12px rgba(184,134,11,0.3); }
+.btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 20px rgba(184,134,11,0.4); }
+.btn-outline { background: transparent; border: 2px solid var(--admin-accent); color: var(--admin-accent); }
+.btn-outline:hover { background: var(--admin-accent-subtle); color: var(--admin-accent-hover); border-color: var(--admin-accent-hover); }
+
+/* ========== Admin app wrapper – ekranda ortada ========== */
+.admin-app-wrap {
+  width: 100%;
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  animation: adminAppIn 0.4s ease-out;
+}
+.admin-app-inner {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px var(--admin-card-border);
+  padding-top: env(safe-area-inset-top);
+}
+@media (min-width: 1024px) {
+  .admin-app-inner {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+@keyframes adminAppIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== Header / Navbar – profesyonel sidebar (masaüstü) ========== */
+.admin-header {
+  position: relative;
+  background: var(--admin-card);
+  border-bottom: 1px solid var(--admin-card-border);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  box-shadow: var(--admin-shadow);
+  transition: background 0.35s, border-color 0.3s, box-shadow 0.35s;
+}
+@media (min-width: 1024px) {
+  .admin-header {
+    width: 260px;
+    min-width: 260px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    border-bottom: none;
+    border-right: 1px solid var(--admin-card-border);
+    padding: 0;
+    box-shadow: none;
+  }
+  .admin-nav-toggle { display: none; }
+  .admin-nav { display: flex !important; }
+}
+.admin-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--admin-card-border), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .admin-header::before { display: none; }
+}
+.admin-header-anim { animation: adminHeaderDown 0.35s ease-out forwards; }
+@keyframes adminHeaderDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.admin-logo {
+  font-weight: 700;
+  color: var(--admin-accent);
+  text-decoration: none;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+@media (min-width: 1024px) {
+  .admin-logo {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--admin-card-border);
+    font-size: 1.1rem;
+  }
+}
+.admin-logo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--admin-accent), transparent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+@media (min-width: 1024px) {
+  .admin-logo::after { display: none; }
+}
+.admin-logo:hover { color: var(--admin-accent-hover); transform: translateY(-1px); }
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+@media (min-width: 1024px) {
+  .admin-nav {
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.75rem 0.5rem;
+    overflow-y: auto;
+  }
+}
+.admin-nav-link {
+  padding: 0.5rem 0.85rem;
+  border-radius: 10px;
+  color: var(--admin-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.2s ease;
+  position: relative;
+}
+@media (min-width: 1024px) {
+  .admin-nav-link {
+    padding: 0.7rem 1.25rem;
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+    margin: 0 0.5rem;
+  }
+}
+.admin-nav-link:hover {
+  background: var(--admin-accent-subtle);
+  color: var(--admin-text);
+}
+@media (min-width: 1024px) {
+  .admin-nav-link:hover {
+    border-left-color: var(--admin-accent);
+  }
+}
+.admin-nav-link.active {
+  background: var(--admin-accent-subtle);
+  color: var(--admin-accent);
+  font-weight: 600;
+}
+@media (min-width: 1024px) {
+  .admin-nav-link.active {
+    border-left-color: var(--admin-accent);
+    background: var(--admin-accent-subtle);
+    box-shadow: none;
+  }
+}
+.admin-nav-link.active:hover {
+  background: var(--admin-accent-subtle);
+  color: var(--admin-accent-hover);
+}
+
+.admin-theme-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--admin-card-border);
+  border-radius: 10px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.2s, border-color 0.2s;
+}
+.admin-theme-toggle:hover {
+  background: var(--admin-accent-subtle);
+  border-color: var(--admin-accent);
+  transform: scale(1.05);
+}
+@media (min-width: 1024px) {
+  .admin-theme-toggle {
+    margin: 0.5rem 1rem 0.75rem;
+    align-self: flex-start;
+  }
+}
+#admin-logout {
+  margin-left: auto;
+}
+@media (min-width: 1024px) {
+  #admin-logout {
+    margin: auto 1rem 1.25rem 1rem;
+    align-self: stretch;
+  }
+}
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s, border-color 0.2s;
+}
+.btn-sm:hover { transform: translateY(-1px); box-shadow: var(--admin-shadow); }
+.btn-block { width: 100%; }
+
+.admin-main {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+@media (min-width: 1024px) {
+  .admin-main {
+    padding: 1.5rem 2rem;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1280px) {
+  .admin-main { padding: 2rem 2.5rem; }
+}
+.admin-page {
+  background: var(--admin-card);
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--admin-shadow);
+  border: 1px solid var(--admin-card-border);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.35s, border-color 0.3s;
+}
+@media (min-width: 1024px) {
+  .admin-page {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 2.25rem;
+    border-radius: 18px;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.06);
+  }
+}
+body[data-admin-theme="dark"] .admin-page {
+  box-shadow: 0 4px 28px rgba(0,0,0,0.25);
+}
+.admin-page.admin-page-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.admin-page h2 {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--admin-card-border);
+}
+.admin-page h2 + .mb-1,
+.admin-page h2 + .reservations-toolbar,
+.admin-page h2 + div.mb-1 { margin-top: 0; }
+.admin-page-desc {
+  font-size: 0.95rem;
+  color: var(--admin-text-muted);
+  margin: -0.5rem 0 1.25rem;
+  line-height: 1.45;
+}
+/* Sayfa başlık satırı: başlık + aksiyon butonu yan yana */
+.admin-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--admin-card-border);
+}
+.admin-page-header h2 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.admin-page-header .mb-1 { margin-bottom: 0; }
+.admin-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--admin-card-border);
+}
+.admin-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.admin-section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 1rem;
+}
+
+/* ========== Dashboard – profesyonel istatistik kartları ve grafikler ========== */
+.dashboard-welcome {
+  background: linear-gradient(135deg, var(--admin-accent-subtle) 0%, rgba(184,134,11,0.04) 100%);
+  border: 1px solid rgba(184,134,11,0.2);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+body[data-admin-theme="dark"] .dashboard-welcome {
+  background: linear-gradient(135deg, var(--admin-accent-subtle) 0%, transparent 100%);
+  border-color: rgba(212,160,23,0.25);
+}
+.dashboard-welcome h2 {
+  margin-bottom: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--admin-text);
+}
+.dashboard-welcome p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--admin-text-muted);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+@media (min-width: 640px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .stats { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1200px) {
+  .stats { grid-template-columns: repeat(6, 1fr); }
+}
+.stat-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-card-border);
+  color: var(--admin-text);
+  padding: 1.25rem;
+  border-radius: 14px;
+  box-shadow: var(--admin-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--admin-shadow-hover);
+  border-color: var(--admin-accent);
+}
+.stat-card.stat-card--accent {
+  background: linear-gradient(135deg, var(--admin-accent) 0%, var(--admin-accent-hover) 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(184,134,11,0.35);
+}
+.stat-card.stat-card--accent:hover {
+  box-shadow: 0 8px 28px rgba(184,134,11,0.45);
+}
+.stat-card.stat-card--success { border-left: 4px solid #22c55e; }
+.stat-card.stat-card--warning { border-left: 4px solid #f59e0b; }
+.stat-card.stat-card--danger { border-left: 4px solid #ef4444; }
+.stat-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  background: var(--admin-accent-subtle);
+  color: var(--admin-accent);
+}
+.stat-card.stat-card--accent .stat-card-icon {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+.stat-card h3 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  margin-bottom: 0.35rem;
+  color: inherit;
+}
+.stat-card p {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+/* Dashboard grafikleri */
+.dashboard-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+@media (max-width: 900px) {
+  .dashboard-charts { grid-template-columns: 1fr; }
+}
+.dashboard-chart-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--admin-shadow);
+  transition: box-shadow 0.25s ease;
+}
+.dashboard-chart-card:hover {
+  box-shadow: var(--admin-shadow-hover);
+}
+.dashboard-chart-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 0.75rem;
+}
+.dashboard-period-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.dashboard-period-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid var(--admin-input-border);
+  background: var(--admin-input-bg);
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.dashboard-period-btn:hover {
+  background: var(--admin-accent-subtle);
+  color: var(--admin-accent);
+  border-color: var(--admin-accent);
+}
+.dashboard-period-btn.active {
+  background: var(--admin-accent);
+  color: #fff;
+  border-color: var(--admin-accent);
+}
+.dashboard-chart-wrap {
+  position: relative;
+  height: 280px;
+}
+.dashboard-chart-wrap--half {
+  height: 240px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.dashboard-etkilesim-desc {
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.75rem;
+}
+.dashboard-etkilesim-extra {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+}
+.dashboard-etkilesim-extra strong {
+  color: var(--admin-text);
+}
+
+/* Kontejan & Fiyat sayfası */
+.kontejan-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 1.25rem;
+  border-bottom: 1px solid var(--admin-card-border);
+  padding-bottom: 0.75rem;
+}
+.kontejan-tab {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.kontejan-tab:hover {
+  background: var(--admin-accent-subtle);
+  color: var(--admin-accent);
+  border-color: var(--admin-accent);
+}
+.kontejan-tab.active {
+  background: var(--admin-accent);
+  color: #fff;
+  border-color: var(--admin-accent);
+}
+.kontejan-panel { margin-top: 1.75rem; }
+.kontejan-panel:first-child { margin-top: 0; }
+.kontejan-section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--admin-card-border);
+  color: var(--admin-text);
+}
+.kontejan-input,
+.fiyat-input {
+  width: 100%;
+  max-width: 100px;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+}
+#kontejan-fiyat-page .table-wrap table td { vertical-align: middle; }
+#kontejan-fiyat-page select[multiple] { min-width: 200px; }
+
+/* Rezervasyonlar sayfası – filtre çubuğu ve boş durum */
+.reservations-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--admin-text); padding-bottom: 0.75rem; border-bottom: 1px solid var(--admin-card-border); }
+.reservations-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--admin-input-bg);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 14px;
+}
+.reservations-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.reservations-filter-label { font-size: 0.875rem; font-weight: 600; color: var(--admin-text-muted); margin-right: 0.25rem; }
+.reservations-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  min-width: 140px;
+}
+.reservations-date-field { display: flex; flex-direction: column; gap: 0.25rem; }
+.reservations-date-field label { font-size: 0.8rem; font-weight: 600; color: var(--admin-text-muted); }
+.reservations-date-field .date-picker-wrap { min-width: 120px; }
+.reservations-date-field .date-picker-display { padding: 0.5rem 0.65rem; border-radius: 8px; font-size: 0.9rem; }
+.reservations-rezno-wrap { min-width: 140px; }
+.reservations-rezno-wrap .reservations-filter-input { min-width: 130px; }
+.reservations-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.reservations-more-panel { margin-bottom: 1rem; padding: 1.25rem; background: var(--admin-input-bg); border-radius: 12px; border: 1px solid var(--admin-card-border); }
+.reservations-more-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.reservations-more-row:last-child { margin-bottom: 0; }
+.reservations-more-label { font-size: 0.9rem; font-weight: 600; color: var(--admin-text); min-width: 140px; }
+.reservations-filter-input { padding: 0.5rem 0.75rem; border: 1px solid var(--admin-input-border); border-radius: 8px; background: var(--admin-input-bg); color: var(--admin-text); font-size: 0.95rem; flex: 1; min-width: 160px; }
+.reservations-content {
+  min-height: 280px;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 14px;
+  padding: 2rem;
+}
+.reservations-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(260px, 1.1fr);
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+.reservations-list {
+  min-width: 0;
+}
+.reservations-detail {
+  border-left: 1px solid var(--admin-card-border);
+  padding-left: 1.5rem;
+}
+.reservations-detail-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--admin-text);
+}
+.reservations-detail-placeholder {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--admin-text-muted);
+}
+.reservations-detail-section {
+  margin-bottom: 1rem;
+}
+.reservations-detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+.reservations-detail-row:last-child {
+  margin-bottom: 0;
+}
+.reservations-detail-label {
+  font-weight: 500;
+  color: var(--admin-text-muted);
+}
+.reservations-detail-value {
+  color: var(--admin-text);
+  text-align: right;
+}
+.reservations-detail-muted {
+  color: var(--admin-text-muted);
+}
+.reservations-detail-empty .reservations-detail-section {
+  display: none;
+}
+.res-actions-cell { white-space: nowrap; }
+.res-actions-cell .btn-detail { margin-right: 0.25rem; text-decoration: none; }
+.reservations-empty-msg {
+  text-align: center;
+  color: var(--admin-text-muted);
+  font-size: 1rem;
+  margin: 0;
+  padding: 3rem 1rem;
+}
+@media (max-width: 768px) {
+  .reservations-toolbar { flex-direction: column; align-items: stretch; }
+  .reservations-filters { flex-direction: column; align-items: stretch; }
+  .reservations-actions { justify-content: flex-start; }
+  .reservations-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .reservations-detail {
+    border-left: none;
+    border-top: 1px solid var(--admin-card-border);
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    padding-left: 0;
+  }
+}
+
+/* Rezervasyon detay sayfası (Booking/Expedia tarzı) */
+#reservation-detail-page { padding-bottom: 2rem; }
+.res-detail-breadcrumb {
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  color: var(--admin-text-muted);
+}
+.res-detail-breadcrumb a {
+  color: var(--admin-accent, #4299e1);
+  text-decoration: none;
+}
+.res-detail-breadcrumb a:hover { text-decoration: underline; }
+.res-detail-breadcrumb-sep { margin: 0 0.4rem; }
+.res-detail-hero {
+  background: linear-gradient(135deg, var(--admin-card) 0%, var(--admin-input-bg) 100%);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.75rem;
+}
+.res-detail-hero-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.res-detail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--admin-text);
+}
+.res-detail-status {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.res-detail-meta {
+  width: 100%;
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+}
+.res-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+.res-detail-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 12px;
+  padding: 1.35rem 1.5rem;
+}
+.res-detail-card-full { grid-column: 1 / -1; }
+.res-detail-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.85rem;
+  color: var(--admin-text);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--admin-card-border);
+}
+.res-detail-dl {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.res-detail-dl dt {
+  font-weight: 500;
+  color: var(--admin-text-muted);
+  margin-top: 0.5rem;
+}
+.res-detail-dl dt:first-child { margin-top: 0; }
+.res-detail-dl dd {
+  margin: 0.15rem 0 0;
+  color: var(--admin-text);
+}
+.res-detail-dl dd a { color: var(--admin-accent, #4299e1); text-decoration: none; }
+.res-detail-dl dd a:hover { text-decoration: underline; }
+.res-detail-note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--admin-text);
+  line-height: 1.5;
+}
+.res-detail-muted { color: var(--admin-text-muted); }
+.res-detail-payment-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.res-detail-payment-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.res-detail-payment-field label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--admin-text-muted);
+}
+.res-detail-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--admin-card-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  min-width: 160px;
+}
+.res-detail-payment-actions { justify-content: flex-end; }
+.res-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: var(--admin-input-bg);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 12px;
+}
+.res-detail-actions-label {
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-right: 0.5rem;
+}
+.res-detail-loading,
+.res-detail-error {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--admin-text-muted);
+}
+.res-detail-error .btn { margin-top: 1rem; }
+
+/* Takvim görünümü (Expedia/Booking tarzı) */
+.calendar-toolbar {
+  background: var(--admin-input-bg);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.calendar-toolbar-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem; }
+.calendar-field { display: flex; flex-direction: column; gap: 0.25rem; }
+.calendar-field label { font-size: 0.8rem; font-weight: 500; color: var(--admin-text-muted); }
+.calendar-field input[type="date"],
+.calendar-field input[type="text"].calendar-date-input,
+.calendar-field input#calendar-date-from,
+.calendar-field input#calendar-date-to,
+.calendar-field select {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  min-width: 140px;
+}
+.date-picker-wrap {
+  position: relative;
+  display: inline-block;
+  min-width: 120px;
+}
+.date-picker-display {
+  display: block;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  min-width: 100px;
+  pointer-events: none;
+}
+.calendar-field .date-picker-display { min-width: 120px; }
+.date-picker-wrap .date-picker-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+}
+.date-picker-wrap { cursor: pointer; }
+.calendar-bulk .date-picker-wrap { min-width: 90px; }
+.calendar-bulk .date-picker-display {
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+.form-group .date-picker-wrap { display: block; width: 100%; min-width: 0; }
+.form-group .date-picker-display { width: 100%; box-sizing: border-box; }
+.calendar-field-btn { justify-content: flex-end; }
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--admin-text-muted);
+}
+.calendar-legend-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+.calendar-legend-item i {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+.calendar-legend-closed i { background: #fecaca; border: 1px solid #f87171; }
+.calendar-legend-bookable i { background: #bbf7d0; border: 1px solid #22c55e; }
+.calendar-bulk-wrap { margin-bottom: 1rem; }
+.calendar-bulk-toggle {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.calendar-bulk-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+}
+.calendar-bulk-wrap.calendar-bulk-open .calendar-bulk-content {
+  max-height: 320px;
+  transition: max-height 0.4s ease-in;
+}
+.calendar-bulk-card {
+  margin-top: 0.5rem;
+  padding: 1.25rem;
+  background: var(--admin-card);
+  border: 1px solid var(--admin-card-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+body[data-admin-theme="dark"] .calendar-bulk-card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.calendar-bulk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem 1.25rem;
+  align-items: end;
+}
+.calendar-bulk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.calendar-bulk-field label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--admin-text-muted);
+}
+.calendar-bulk-field select,
+.calendar-bulk-field input[type="number"] {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 8px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.9rem;
+  width: 100%;
+  min-width: 0;
+}
+.calendar-bulk-field .date-picker-wrap {
+  min-width: 0;
+  width: 100%;
+}
+.calendar-bulk-field .date-picker-display {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+.calendar-bulk-actions {
+  align-items: flex-end;
+}
+.calendar-bulk-actions .btn {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  font-weight: 500;
+}
+.calendar-all-rooms-label {
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+  padding: 0.5rem 0;
+}
+.calendar-grid-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--admin-card-border);
+  border-radius: 12px;
+  background: var(--admin-card);
+}
+.calendar-grid-wrap::-webkit-scrollbar {
+  height: 12px;
+}
+.calendar-grid-wrap::-webkit-scrollbar-track {
+  background: var(--admin-input-bg);
+  border-radius: 6px;
+}
+.calendar-grid-wrap::-webkit-scrollbar-thumb {
+  background: var(--admin-text-muted);
+  border-radius: 6px;
+}
+.calendar-grid-wrap::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-text);
+}
+#calendar-rooms-container {
+  padding: 0.5rem 0;
+}
+.calendar-room-block {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--admin-card-border);
+}
+.calendar-room-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.calendar-room-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--admin-text);
+  margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
+}
+.calendar-room-id {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+}
+.calendar-room-block .table-wrap {
+  margin-top: 0;
+  border-radius: 10px;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+.calendar-room-block .table-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+.calendar-room-block .table-wrap::-webkit-scrollbar-track {
+  background: var(--admin-input-bg);
+  border-radius: 4px;
+}
+.calendar-room-block .table-wrap::-webkit-scrollbar-thumb {
+  background: var(--admin-text-muted);
+  border-radius: 4px;
+}
+.calendar-room-block .table-wrap::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-text);
+}
+.calendar-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--admin-text-muted);
+}
+.calendar-placeholder {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--admin-text-muted);
+}
+.calendar-grid-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.calendar-grid-table th,
+.calendar-grid-table td {
+  border: 1px solid var(--admin-card-border);
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  min-width: 52px;
+}
+.calendar-row-label {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--admin-input-border) !important;
+  color: var(--admin-text);
+  font-weight: 600;
+  text-align: left !important;
+  padding: 0.5rem 0.75rem !important;
+  min-width: 100px;
+  white-space: nowrap;
+}
+.calendar-day-col {
+  font-weight: 500;
+  color: var(--admin-text-muted);
+}
+.calendar-day-name { display: block; font-size: 0.7rem; }
+.calendar-day-num { font-size: 0.95rem; }
+.calendar-weekend { background: rgba(0,0,0,0.03); }
+body[data-admin-theme="dark"] .calendar-weekend { background: rgba(255,255,255,0.04); }
+.calendar-cell-closed { background: #fef2f2 !important; }
+body[data-admin-theme="dark"] .calendar-cell-closed { background: rgba(239, 68, 68, 0.2) !important; }
+.calendar-cell-bookable { background: #f0fdf4 !important; }
+body[data-admin-theme="dark"] .calendar-cell-bookable { background: rgba(34, 197, 94, 0.15) !important; }
+.calendar-cell-past { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
+.calendar-cell-past .calendar-status-btn,
+.calendar-cell-past .calendar-cell-value { pointer-events: none; cursor: not-allowed; }
+.calendar-cell-input {
+  width: 100%;
+  max-width: 70px;
+  padding: 0.35rem 0.4rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 6px;
+  background: var(--admin-card);
+  color: var(--admin-text);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.calendar-cell-input:focus {
+  outline: none;
+  border-color: #2c5282;
+  box-shadow: 0 0 0 2px rgba(44, 82, 130, 0.25);
+}
+.calendar-cell-closed .calendar-cell-input { background: #fff; }
+body[data-admin-theme="dark"] .calendar-cell-input { background: var(--admin-input-bg); }
+body[data-admin-theme="dark"] .calendar-cell-closed .calendar-cell-input { background: var(--admin-input-bg); }
+
+/* Oda durumu: Kapalı / Açık buton */
+.calendar-cell-status { cursor: pointer; padding: 0.5rem !important; text-align: center; }
+.calendar-status-btn {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.calendar-cell-status.calendar-cell-closed .calendar-status-btn {
+  background: #fecaca;
+  color: #b91c1c;
+  border-color: #f87171;
+}
+.calendar-cell-status.calendar-cell-bookable .calendar-status-btn {
+  background: #bbf7d0;
+  color: #15803d;
+  border-color: #22c55e;
+}
+body[data-admin-theme="dark"] .calendar-cell-status.calendar-cell-closed .calendar-status-btn {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  border-color: #ef4444;
+}
+body[data-admin-theme="dark"] .calendar-cell-status.calendar-cell-bookable .calendar-status-btn {
+  background: rgba(34, 197, 94, 0.3);
+  color: #86efac;
+  border-color: #22c55e;
+}
+
+/* Kutucuk içinde değer (kontejan, fiyat, net rezerve) */
+.calendar-cell-value {
+  display: inline-block;
+  min-width: 2.5rem;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--admin-text);
+}
+.calendar-cell-booked .calendar-cell-value {
+  font-weight: 600;
+  color: var(--admin-text-muted);
+}
+.calendar-kontejan-val,
+.calendar-fiyat-val { cursor: pointer; }
+.calendar-kontejan-val:hover,
+.calendar-fiyat-val:hover { text-decoration: underline; }
+.calendar-cell-booked { background: #f8fafc !important; }
+body[data-admin-theme="dark"] .calendar-cell-booked { background: rgba(255,255,255,0.05) !important; }
+
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: visible;
+  margin-top: 1rem;
+  border-radius: 14px;
+  box-shadow: var(--admin-shadow);
+  border: 1px solid var(--admin-card-border);
+  -webkit-overflow-scrolling: touch;
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--admin-text-muted);
+  background: var(--admin-input-bg);
+  border-bottom: 2px solid var(--admin-card-border);
+  white-space: nowrap;
+}
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--admin-card-border);
+  transition: background 0.2s;
+  color: var(--admin-text);
+  vertical-align: middle;
+}
+tr:hover td { background: var(--admin-accent-subtle); }
+th { background: var(--admin-input-border); font-weight: 600; color: var(--admin-text); }
+tbody tr { animation: adminRowIn 0.4s ease-out backwards; }
+tbody tr:nth-child(1) { animation-delay: 0.03s; }
+tbody tr:nth-child(2) { animation-delay: 0.06s; }
+tbody tr:nth-child(3) { animation-delay: 0.09s; }
+tbody tr:nth-child(4) { animation-delay: 0.12s; }
+tbody tr:nth-child(5) { animation-delay: 0.15s; }
+tbody tr:nth-child(n+6) { animation-delay: 0.18s; }
+@keyframes adminRowIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+tr:hover { background: var(--admin-input-border); }
+.btn-small {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.35rem;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-small:hover { transform: scale(1.05); opacity: 0.95; }
+.btn-ok { background: #22c55e; color: #fff; }
+.btn-no { background: #ef4444; color: #fff; }
+.btn-del { background: #64748b; color: #fff; }
+.btn-edit { background: linear-gradient(135deg, #b8860b 0%, #8b6914 100%); color: #fff; }
+.btn-edit:hover { opacity: 0.95; }
+.btn-small.btn-active { background: #22c55e; color: #fff; }
+.btn-small.btn-passive { background: #94a3b8; color: #fff; }
+.room-id-cell { font-family: ui-monospace, monospace; font-size: 0.85rem; background: var(--admin-input-border); padding: 0.25rem 0.5rem; border-radius: 6px; color: var(--admin-text); }
+.durum { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.8rem; font-weight: 500; }
+.durum-beklemede { background: #fef3c7; color: #92400e; }
+.durum-onaylandi { background: #d1fae5; color: #065f46; }
+.durum-iptal { background: #fee2e2; color: #991b1b; }
+.durum-gelmeyen { background: #e5e7eb; color: #374151; }
+.btn-small.btn-warn { background: #f3f4f6; color: #4b5563; border: 1px solid #d1d5db; }
+.btn-small.btn-warn:hover { background: #e5e7eb; }
+
+/* Ana Sayfa ayarları – bölüm sekmeleri */
+.settings-section-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.settings-section-btn {
+  padding: 0.65rem 1.25rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 10px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.settings-section-btn:hover { background: var(--admin-accent-subtle); border-color: var(--admin-accent); color: var(--admin-accent); }
+.settings-section-btn.active {
+  background: var(--admin-accent);
+  color: #fff;
+  border-color: var(--admin-accent);
+}
+.settings-section-content {
+  margin-top: 0;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+}
+.settings-section-content::-webkit-scrollbar { width: 8px; }
+.settings-section-content::-webkit-scrollbar-track { background: var(--admin-input-border); border-radius: 4px; }
+.settings-section-content::-webkit-scrollbar-thumb { background: var(--admin-text-muted); border-radius: 4px; }
+.settings-section-form { max-width: 560px; }
+.settings-subheading { font-size: 1rem; font-weight: 600; color: var(--admin-text); margin: 1.25rem 0 0.75rem; }
+.settings-hint { font-size: 0.9rem; color: var(--admin-text-muted); margin: 0 0 1rem; line-height: 1.4; }
+.contact-extra-row { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; }
+.contact-extra-row .contact-extra-fields { flex: 1; min-width: 0; }
+.contact-extra-row .contact-extra-remove { flex-shrink: 0; margin-top: 1.75rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
+.form-group { margin-bottom: 1.25rem; }
+.form-group:last-child { margin-bottom: 0; }
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  letter-spacing: 0.01em;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--admin-input-border);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 3px var(--admin-accent-subtle);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--admin-text-muted);
+  opacity: 0.85;
+}
+.form-hint { display: block; font-size: 0.8rem; color: var(--admin-text-muted); margin-top: 0.35rem; line-height: 1.35; }
+
+/* Kart listeleri – hizalı grid, premium boşluk */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+@media (min-width: 1200px) {
+  .card-list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); max-width: 100%; }
+}
+.card-item {
+  border: 1px solid var(--admin-card-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  background: var(--admin-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-item:hover { transform: translateY(-3px); box-shadow: var(--admin-shadow-hover); border-color: var(--admin-accent); }
+.card-item img { max-width: 100%; height: 120px; object-fit: cover; border-radius: 10px; margin-bottom: 0.75rem; }
+.card-item-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; align-items: center; }
+.room-images-sortable { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+.room-image-item { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; padding: 0.5rem; border: 1px solid var(--admin-card-border); border-radius: 10px; background: var(--admin-bg); width: 100px; }
+.room-image-item img { width: 88px; height: 66px; object-fit: contain; border-radius: 6px; background: var(--admin-input-border); }
+.room-image-order { font-size: 0.75rem; font-weight: 600; color: var(--admin-text-muted); }
+.room-image-actions { display: flex; flex-wrap: wrap; gap: 0.25rem; justify-content: center; }
+.room-image-actions .btn-small { padding: 0.25rem 0.4rem; font-size: 0.8rem; }
+.mb-1 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 1.5rem; }
+.admin-page h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--admin-card-border);
+}
+.admin-page h3:first-of-type { margin-top: 0; }
+.hotel-overview-card-row,
+.hotel-overview-full-row { margin-bottom: 1rem; padding: 1rem; background: var(--admin-bg); border: 1px solid var(--admin-border); border-radius: 8px; }
+.complaint-desc-cell { max-width: 320px; word-wrap: break-word; white-space: normal; font-size: 0.9rem; }
+.complaint-detail-modal-box { max-width: 520px; }
+.complaint-detail-body { margin-bottom: 0; }
+.complaint-detail-dl { margin: 0; font-size: 0.95rem; }
+.complaint-detail-dl dt { font-weight: 500; color: var(--admin-text-muted); margin-top: 0.75rem; }
+.complaint-detail-dl dt:first-child { margin-top: 0; }
+.complaint-detail-dl dd { margin: 0.2rem 0 0; color: var(--admin-text); }
+.complaint-detail-message { white-space: pre-wrap; word-wrap: break-word; line-height: 1.5; max-height: 280px; overflow-y: auto; }
+.testimonial-list-item { display: flex; align-items: center; gap: 0.75rem; }
+.testimonial-thumb { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.svc-icon-preview { font-size: 1.5rem; margin-right: 0.5rem; }
+.svc-list-thumb { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; margin-right: 0.5rem; vertical-align: middle; flex-shrink: 0; }
+.card-item:has(.svc-list-thumb) { display: flex; align-items: center; flex-wrap: wrap; }
+.card-item:has(.svc-list-thumb) .card-item-actions { width: 100%; }
+.btn-primary { transition: transform 0.2s, box-shadow 0.2s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3); }
+.btn-outline { transition: transform 0.2s; }
+.btn-outline:hover { transform: translateY(-1px); }
+
+/* Admin Yönetimi - Hesap ayarları */
+.account-settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+.account-card {
+  background: linear-gradient(145deg, #fafbfc 0%, #f0f2f5 100%);
+  border: 1px solid #e8eaed;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  animation: adminStatIn 0.5s ease-out backwards;
+}
+.account-card:nth-child(1) { animation-delay: 0.08s; }
+.account-card:nth-child(2) { animation-delay: 0.16s; }
+.account-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.08); transform: translateY(-3px); }
+.account-card-icon { font-size: 2rem; margin-bottom: 0.75rem; line-height: 1; }
+.account-card h3 { font-size: 1.15rem; color: #1a1a1a; margin-bottom: 0.4rem; font-weight: 600; }
+.account-card-desc { font-size: 0.9rem; color: #555; margin-bottom: 1.25rem; line-height: 1.45; }
+.account-form .form-group { margin-bottom: 1rem; }
+.account-form .form-group:last-of-type { margin-bottom: 0.75rem; }
+.account-form .btn { margin-top: 0.5rem; }
+.input-readonly { background: var(--admin-input-border); color: var(--admin-text-muted); cursor: not-allowed; }
+
+.admin-list-section { border-top: 1px solid var(--admin-card-border); padding-top: 1.75rem; }
+.admin-list-title { font-size: 1.2rem; color: var(--admin-text); margin-bottom: 1rem; font-weight: 600; }
+.role-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 8px; font-size: 0.8rem; font-weight: 500; }
+.role-super_admin { background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%); color: #fff; }
+.role-admin { background: var(--admin-input-border); color: var(--admin-text); }
+.current-user-label { font-size: 0.85rem; color: #2c5282; font-weight: 500; }
+.admin-form-box { background: var(--admin-input-border); border-radius: 12px; padding: 1.25rem; border: 1px solid var(--admin-card-border); }
+
+.status-indicator { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-active .status-dot { background: #22c55e; box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.35); }
+.status-active { color: #15803d; font-weight: 500; }
+.status-inactive .status-dot { background: #94a3b8; }
+.status-inactive { color: #64748b; }
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: adminModalBgIn 0.3s ease;
+}
+body[data-admin-theme="dark"] .admin-modal { background: rgba(0, 0, 0, 0.7); }
+@keyframes adminModalBgIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.admin-modal-box {
+  background: var(--admin-card);
+  color: var(--admin-text);
+  padding: 1.75rem;
+  border-radius: 16px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--admin-card-border);
+  max-width: 400px;
+  width: 100%;
+  animation: adminModalIn 0.35s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+  transition: background 0.35s, border-color 0.3s;
+}
+@keyframes adminModalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.admin-modal-box h3 { margin-bottom: 1.25rem; font-size: 1.25rem; font-weight: 600; }
+.admin-modal-box .form-group { margin-bottom: 1rem; }
+.admin-modal-box label { display: block; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 500; color: var(--admin-text-muted); }
+.admin-modal-box input { width: 100%; padding: 0.8rem; border: 1px solid var(--admin-input-border); border-radius: 10px; font-size: 1rem; background: var(--admin-input-bg); color: var(--admin-text); }
+.form-actions { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+.form-actions .btn { flex: 1; border-radius: 10px; }
+
+/* İşlem sütunu – tek satır, hizalı, animasyonlu */
+.admin-actions-cell { vertical-align: middle; white-space: nowrap; }
+.admin-actions-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  min-height: 36px;
+}
+.admin-actions-wrap .current-user-label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 2.25rem;
+  height: 32px;
+  padding: 0 0.5rem;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  border-radius: 8px;
+  background: rgba(44, 82, 130, 0.12);
+  color: #2c5282;
+}
+body[data-admin-theme="dark"] .admin-actions-wrap .current-user-label { background: rgba(44, 82, 130, 0.35); color: #93c5fd; }
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.25s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+.btn-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.btn-icon:active { transform: scale(0.96); transition-duration: 0.1s; }
+.btn-icon .icon-ayar { font-size: 1.15rem; }
+.btn-icon .icon-del { font-size: 1.05rem; }
+.btn-ayar.btn-icon { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #fff; }
+.btn-ayar.btn-icon:hover { background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4); }
+.btn-del.btn-icon { background: linear-gradient(135deg, #64748b 0%, #475569 100%); color: #fff; }
+.btn-del.btn-icon:hover { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35); }
+
+/* Ayarlar modalı – seçim ekranı */
+.admin-ayar-step { min-width: 320px; }
+.admin-ayar-desc { color: var(--admin-text-muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+.admin-ayar-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+.admin-ayar-buttons .btn-ayar-option { width: 100%; padding: 0.85rem 1rem; text-align: center; }
+.admin-ayar-modal-box .form-actions { justify-content: flex-end; }
+.admin-ayar-back { flex: 0; }
+
+/* Şifre alanı – göz ile göster/gizle */
+.password-wrap { position: relative; display: block; }
+.password-wrap input { padding-right: 2.75rem; }
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #64748b;
+  transition: color 0.2s, background 0.2s;
+}
+.password-toggle:hover { color: #1a365d; background: rgba(0,0,0,0.06); }
+.password-toggle.visible { color: #2c5282; }
+body[data-admin-theme="dark"] .password-toggle { color: var(--admin-text-muted); }
+body[data-admin-theme="dark"] .password-toggle:hover { color: #93c5fd; background: rgba(255,255,255,0.08); }
+
+/* Tablolar: mobilde yatay kaydırma, sistem kasmasın */
+.table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-wrap table { min-width: 400px; }
+
+/* Mobil menü: hamburger açılır menü */
+.admin-nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid var(--admin-card-border);
+  border-radius: 10px;
+  background: var(--admin-input-bg);
+  color: var(--admin-text);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.admin-nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+  pointer-events: none;
+}
+.admin-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.admin-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.admin-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 1023px) {
+  .admin-nav-toggle {
+    display: flex !important;
+    order: 2;
+    z-index: 201;
+    position: relative;
+    background: var(--admin-input-bg);
+    border: 2px solid var(--admin-card-border);
+    color: var(--admin-text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .admin-header {
+    position: relative;
+    flex-wrap: nowrap;
+    padding: 0.6rem max(0.75rem, env(safe-area-inset-left));
+    gap: 0.5rem;
+    min-height: 52px;
+    z-index: 202;
+  }
+  .admin-header .admin-logo {
+    order: 1;
+    flex: 1;
+    min-width: 0;
+    font-size: 1rem;
+    max-width: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 0.25rem;
+  }
+  .admin-header .admin-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    max-height: calc(100vh - 56px);
+    max-height: calc(100dvh - 56px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    background: var(--admin-card);
+    flex-direction: column;
+    padding: 0.75rem max(0.75rem, env(safe-area-inset-left));
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    gap: 0.35rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    border-bottom: 1px solid var(--admin-card-border);
+  }
+  .admin-header .admin-nav.is-open { display: flex; }
+  .admin-nav-link {
+    padding: 0.85rem 1rem;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .admin-nav .admin-theme-toggle { width: 100%; min-height: 48px; justify-content: flex-start; padding-left: 1rem; flex-shrink: 0; }
+  .admin-nav .btn { width: 100%; margin-top: 0.5rem; min-height: 48px; flex-shrink: 0; }
+}
+@media (min-width: 993px) {
+  .admin-nav { display: flex !important; }
+}
+
+/* ========== Mobil uyumluluk (tüm admin sayfaları) ========== */
+@media (max-width: 1023px) {
+  .admin-app-inner { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .admin-main { width: 100%; max-width: 100%; min-width: 0; overflow-x: hidden; }
+  .admin-page { width: 100%; max-width: 100%; box-sizing: border-box; }
+}
+@media (max-width: 768px) {
+  .admin-main { padding: 0.75rem max(1rem, env(safe-area-inset-left)); padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+  .admin-page {
+    padding: 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    border-radius: 12px;
+  }
+  .admin-page h2 { font-size: 1.25rem; margin-bottom: 1rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .stat-card { padding: 1rem; }
+  .stat-card p { font-size: 1.5rem; }
+  .stat-card h3 { font-size: 0.85rem; }
+  .dashboard-charts { gap: 1rem; margin-top: 1rem; }
+  .dashboard-chart-card { padding: 1rem; }
+  .dashboard-chart-wrap { height: 220px; }
+  .dashboard-period-tabs { flex-wrap: wrap; }
+  .card-list { grid-template-columns: 1fr; gap: 1rem; }
+  .card-item-actions { flex-wrap: wrap; gap: 0.5rem; }
+  .card-item-actions .btn-small,
+  .card-item-actions .btn-edit,
+  .card-item-actions .btn-del,
+  .card-item-actions .room-img-up,
+  .card-item-actions .room-img-down { min-height: 44px; padding: 0.5rem 0.75rem; }
+  .table-wrap { margin-left: -0.5rem; margin-right: -0.5rem; width: calc(100% + 1rem); border-radius: 10px; }
+  table { font-size: 0.85rem; }
+  th, td { padding: 0.6rem 0.75rem; }
+  .admin-actions-wrap { flex-wrap: wrap; gap: 0.35rem; }
+  .admin-actions-wrap .btn-icon { width: 40px; height: 40px; }
+  .form-group input, .form-group select, .form-group textarea { font-size: 16px; min-height: 44px; }
+  .btn, .btn-sm, .btn-primary, .btn-outline { min-height: 44px; padding: 0.65rem 1rem; }
+  .reservations-toolbar { flex-direction: column; align-items: stretch; padding: 0.75rem; gap: 0.75rem; }
+  .reservations-filters { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .reservations-select, .reservations-filter-input, .reservations-date-field .date-picker-wrap { min-width: 0; width: 100%; }
+  .reservations-actions { flex-wrap: wrap; }
+  .reservations-layout { grid-template-columns: 1fr; gap: 1rem; }
+  .reservations-detail { border-left: none; border-top: 1px solid var(--admin-card-border); padding-left: 0; padding-top: 1rem; margin-top: 0.5rem; }
+  .reservations-content { padding: 1rem; }
+  .kontejan-tabs { gap: 0.35rem; }
+  .kontejan-tabs .btn { padding: 0.5rem 0.75rem; font-size: 0.85rem; }
+  .settings-section-form { max-width: none; }
+  .admin-form-box { padding: 1rem; }
+  .room-images-sortable .room-image-item { min-width: 80px; }
+  .form-actions { flex-direction: column; gap: 0.5rem; }
+  .form-actions .btn { width: 100%; }
+  .admin-modal-backdrop { padding: 1rem; align-items: flex-start; padding-top: max(2rem, env(safe-area-inset-top)); }
+  .admin-modal-box { max-width: 100%; width: 100%; max-height: calc(100vh - 2rem); overflow-y: auto; padding: 1.25rem; margin: auto; }
+  .admin-ayar-step { min-width: 0; width: 100%; }
+  .account-cards { grid-template-columns: 1fr; }
+  .calendar-room-block .table-wrap { margin-left: 0; margin-right: 0; }
+  .calendar-grid-table th, .calendar-grid-table td { min-width: 44px; padding: 0.3rem 0.35rem; font-size: 0.8rem; }
+  .calendar-row-label { min-width: 80px; padding: 0.4rem 0.5rem !important; font-size: 0.8rem; }
+  .calendar-cell-input { max-width: 100%; }
+  #kontejan-fiyat-page .table-wrap table td { padding: 0.5rem 0.4rem; }
+  #kontejan-fiyat-page select[multiple] { min-width: 0; width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .admin-header { padding: 0.6rem max(0.75rem, env(safe-area-inset-left)); }
+  .admin-main { padding: 0.5rem max(0.75rem, env(safe-area-inset-left)); }
+  .admin-page { padding: 0.75rem; }
+  .admin-page h2 { font-size: 1.15rem; }
+  .stats { grid-template-columns: 1fr; }
+  .stat-card { padding: 0.9rem; }
+  .stat-card p { font-size: 1.4rem; }
+  th, td { padding: 0.5rem 0.5rem; font-size: 0.8rem; }
+  .reservations-more-row { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+  .reservations-more-label { min-width: 0; }
+  .reservation-detail-back { min-height: 44px; padding: 0.65rem 1rem; }
+  .mb-1 { margin-bottom: 0.75rem !important; }
+  .slider-form-f .form-group, #slider-form-f .form-group { margin-bottom: 0.75rem; }
+  .testimonial-list-item { flex-wrap: wrap; }
+  .testimonial-list-item .card-item-actions { width: 100%; justify-content: flex-start; }
+}

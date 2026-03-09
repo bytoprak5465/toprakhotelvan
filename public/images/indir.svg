@@ -1,0 +1,31 @@
+<svg width="620" height="200" viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e6b8"/>
+      <stop offset="35%" stop-color="#e5c84a"/>
+      <stop offset="65%" stop-color="#c9a227"/>
+      <stop offset="100%" stop-color="#a67c1a"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- 3 zarif yildiz - ustte -->
+  <g fill="url(#gold)" filter="url(#softGlow)">
+    <polygon points="310,18 314,28 325,28 316,35 319,46 310,40 301,46 304,35 295,28 306,28"/>
+    <polygon points="270,22 274,32 285,32 276,39 279,50 270,44 261,50 264,39 255,32 266,32"/>
+    <polygon points="350,22 354,32 365,32 356,39 359,50 350,44 341,50 344,39 335,32 346,32"/>
+  </g>
+  <!-- Ince yay -->
+  <path d="M220 58 Q310 38 400 58" stroke="url(#gold)" stroke-width="1.2" fill="none" opacity="0.9"/>
+  <!-- TOPRAK - buyuk, l�ks -->
+  <text x="310" y="118" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="92" font-weight="600" letter-spacing="0.12em" fill="url(#gold)">TOPRAK</text>
+  <!-- HOTEL - modern, net -->
+  <text x="310" y="168" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="46" font-weight="500" letter-spacing="0.35em" fill="url(#gold)" opacity="0.95">HOTEL</text>
+  <!-- Alt cizgi -->
+  <line x1="250" y1="182" x2="370" y2="182" stroke="url(#gold)" stroke-width="1" opacity="0.7"/>
+</svg>

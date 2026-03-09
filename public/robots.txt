@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap konumu (canonical domain ile güncelleyin)
+Sitemap: http://www.toprakhotelvan.com/sitemap.xml
+
+# Admin paneli tarayıcıların indekslemesine gerek yok (isteğe bağlı)
+Disallow: /admin/

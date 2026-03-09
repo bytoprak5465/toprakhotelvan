@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" role="img" aria-label="Toprak Otel">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#d4a017"/>
+      <stop offset="100%" style="stop-color:#b8860b"/>
+    </linearGradient>
+  </defs>
+  <!-- Üç y1ld1z -->
+  <g fill="currentColor" opacity="0.95">
+    <path d="M54 8 L55.5 14 L62 14 L57 18 L58.5 24 L54 20 L49.5 24 L51 18 L46 14 L52.5 14 Z"/>
+    <path d="M60 8 L61.5 14 L68 14 L63 18 L64.5 24 L60 20 L55.5 24 L57 18 L52 14 L58.5 14 Z"/>
+    <path d="M66 8 L67.5 14 L74 14 L69 18 L70.5 24 L66 20 L61.5 24 L63 18 L58 14 L64.5 14 Z"/>
+  </g>
+  <!-- Defne çelengi (basit halka) -->
+  <ellipse cx="60" cy="42" rx="22" ry="24" stroke="url(#gold)" stroke-width="2.5" fill="none"/>
+  <path d="M45 30 Q60 25 75 30 Q78 38 75 48 Q60 58 45 48 Q42 38 45 30" stroke="url(#gold)" stroke-width="1.2" fill="none" opacity="0.8"/>
+  <!-- TH -->
+  <text x="60" y="48" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="url(#gold)">TH</text>
+  <!-- Üç nokta -->
+  <circle cx="54" cy="62" r="2" fill="url(#gold)"/>
+  <circle cx="60" cy="62" r="2" fill="url(#gold)"/>
+  <circle cx="66" cy="62" r="2" fill="url(#gold)"/>
+  <!-- Süs çizgisi -->
+  <path d="M35 72 Q45 68 60 72 Q75 68 85 72" stroke="url(#gold)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M38 78 Q50 74 60 78 Q70 74 82 78" stroke="url(#gold)" stroke-width="0.8" fill="none" opacity="0.7"/>
+  <!-- TOPRAK -->
+  <text x="60" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="22" font-weight="bold" letter-spacing="0.15em" fill="url(#gold)">TOPRAK</text>
+  <!-- HOTEL -->
+  <text x="60" y="128" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" letter-spacing="0.4em" fill="url(#gold)">HOTEL</text>
+</svg>

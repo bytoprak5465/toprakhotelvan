@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Admin Panel — Toprak Otel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div id="login-page" class="admin-login">
+    <div class="admin-login-bg">
+      <span class="admin-login-bubble admin-login-bubble-1"></span>
+      <span class="admin-login-bubble admin-login-bubble-2"></span>
+      <span class="admin-login-bubble admin-login-bubble-3"></span>
+      <span class="admin-login-bubble admin-login-bubble-4"></span>
+      <span class="admin-login-bubble admin-login-bubble-5"></span>
+      <span class="admin-login-bubble admin-login-bubble-6"></span>
+      <span class="admin-login-bubble admin-login-bubble-7"></span>
+      <span class="admin-login-bubble admin-login-bubble-8"></span>
+    </div>
+    <h1 class="admin-login-title">Toprak Otel Admin Paneli</h1>
+    <div class="admin-login-box admin-anim-in">
+      <div class="admin-login-header">
+        <span class="admin-login-line"></span>
+        <span class="admin-login-avatar">
+          <svg class="admin-login-avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        <span class="admin-login-line"></span>
+      </div>
+      <form id="login-form" class="admin-login-form">
+        <div class="admin-login-field">
+          <span class="admin-login-field-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <input type="text" name="username" required placeholder="User Name" autocomplete="username">
+        </div>
+        <div class="admin-login-field">
+          <span class="admin-login-field-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <div class="password-wrap">
+            <input type="password" name="password" required placeholder="Password" autocomplete="current-password">
+            <button type="button" class="password-toggle" aria-label="Şifreyi göster" title="Şifreyi göster">👁</button>
+          </div>
+        </div>
+        <p id="login-error" class="form-error" style="display:none"></p>
+        <button type="submit" class="btn admin-login-btn">Login</button>
+      </form>
+      <div class="admin-login-footer">
+        <label class="admin-login-remember">
+          <input type="checkbox" name="remember" class="admin-login-checkbox">
+          <span class="admin-login-checkbox-custom"></span>
+          Beni hatırla
+        </label>
+      </div>
+      <div class="admin-login-footer-line"></div>
+    </div>
+  </div>
+
+  <div id="admin-app" class="admin-app-wrap" style="display:none">
+    <div class="admin-app-inner">
+      <header class="admin-header admin-header-anim">
+        <a href="../index.html" class="admin-logo">Toprak Otel Admin</a>
+        <button type="button" class="admin-nav-toggle" id="admin-nav-toggle" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button>
+        <nav class="admin-nav" id="admin-nav">
+          <button type="button" class="admin-theme-toggle" id="admin-theme-toggle" aria-label="Gece/Gündüz modu" title="Gece/Gündüz modu">🌙</button>
+          <a href="#dashboard" class="admin-nav-link">Dashboard</a>
+          <a href="#slider" class="admin-nav-link">Slider</a>
+          <a href="#gallery" class="admin-nav-link">Galeri</a>
+          <a href="#settings" class="admin-nav-link">Ana Sayfa</a>
+          <a href="#rooms" class="admin-nav-link">Odalar</a>
+          <a href="#kontejan-fiyat" class="admin-nav-link">Kontejan & Fiyat</a>
+          <a href="#reservations" class="admin-nav-link">Rezervasyonlar</a>
+          <a href="#change-requests" class="admin-nav-link">Değişiklik Talepleri</a>
+          <a href="#complaints" class="admin-nav-link">Şikayet & Öneriler</a>
+          <a href="#testimonials" class="admin-nav-link">Yorumlar</a>
+          <a href="#services" class="admin-nav-link">Hizmetler</a>
+          <a href="#admins" class="admin-nav-link">Hesap & Adminler</a>
+          <button type="button" class="btn btn-outline btn-sm" id="admin-logout">Çıkış</button>
+        </nav>
+      </header>
+
+      <main class="admin-main">
+        <div id="dashboard-page" class="admin-page admin-page-visible"></div>
+        <div id="slider-page" class="admin-page" style="display:none"></div>
+        <div id="gallery-page" class="admin-page" style="display:none"></div>
+        <div id="settings-page" class="admin-page" style="display:none"></div>
+        <div id="rooms-page" class="admin-page" style="display:none"></div>
+        <div id="kontejan-fiyat-page" class="admin-page" style="display:none"></div>
+        <div id="reservations-page" class="admin-page" style="display:none"></div>
+        <div id="reservation-detail-page" class="admin-page" style="display:none"></div>
+        <div id="change-requests-page" class="admin-page" style="display:none"></div>
+        <div id="complaints-page" class="admin-page" style="display:none"></div>
+        <div id="testimonials-page" class="admin-page" style="display:none"></div>
+        <div id="services-page" class="admin-page" style="display:none"></div>
+        <div id="admins-page" class="admin-page" style="display:none"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../js/hotel-overview.js"></script>
+  <script src="js/admin-theme.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

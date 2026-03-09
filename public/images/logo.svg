@@ -1,0 +1,60 @@
+<svg width="620" height="270" viewBox="0 0 620 270" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+
+  <defs>
+    <!-- Premium Altin Gradient -->
+    <linearGradient id="goldFinal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff3c4"/>
+      <stop offset="40%" stop-color="#e0bc4f"/>
+      <stop offset="70%" stop-color="#c89f2a"/>
+      <stop offset="100%" stop-color="#9c7a1c"/>
+    </linearGradient>
+
+    <!-- Soft Glow -->
+    <filter id="glowFinal">
+      <feGaussianBlur stdDeviation="1.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Minimal 3 Star (Daha zarif) -->
+  <g fill="url(#goldFinal)" filter="url(#glowFinal)">
+    <polygon points="285,42 289,53 301,53 292,61 296,72 285,65 274,72 278,61 269,53 281,53"/>
+    <polygon points="310,35 314,46 326,46 317,54 321,65 310,58 299,65 303,54 294,46 306,46"/>
+    <polygon points="335,42 339,53 351,53 342,61 346,72 335,65 324,72 328,61 319,53 331,53"/>
+  </g>
+
+  <!-- Üst zarif yay -->
+  <path d="M200 95 Q310 60 420 95"
+        stroke="url(#goldFinal)"
+        stroke-width="1.6"
+        fill="none"/>
+
+  <!-- TOPRAK -->
+  <text x="50%" y="165"
+        text-anchor="middle"
+        font-family="Cinzel, Playfair Display, serif"
+        font-size="78"
+        letter-spacing="6"
+        fill="url(#goldFinal)">
+    TOPRAK
+  </text>
+
+  <!-- HOTEL -->
+  <text x="50%" y="215"
+        text-anchor="middle"
+        font-family="Cormorant Garamond, serif"
+        font-size="38"
+        letter-spacing="8"
+        fill="url(#goldFinal)">
+    HOTEL
+  </text>
+
+  <!-- Alt İnce Premium Çizgi -->
+  <line x1="240" y1="230" x2="380" y2="230"
+        stroke="url(#goldFinal)"
+        stroke-width="1.2"/>
+
+</svg>

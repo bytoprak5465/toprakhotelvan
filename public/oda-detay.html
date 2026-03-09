@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Oda Detayı | Toprak Otel - Konforlu Odalar, Özellikler ve Rezervasyon</title>
+  <meta name="description" content="Toprak Otel oda detayı. Oda özellikleri, kapasite, fiyat ve fotoğraflar. Toprak Otel konforlu odalarında rezervasyon yapın.">
+  <meta name="keywords" content="Toprak Otel oda, oda detay, otel odası özellikleri, Toprak Hotel rooms">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="http://www.toprakhotelvan.com/oda-detay.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://www.toprakhotelvan.com/oda-detay.html">
+  <meta property="og:title" content="Oda Detayı | Toprak Otel">
+  <meta property="og:description" content="Toprak Otel - oda özellikleri ve rezervasyon.">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Toprak Otel">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=24">
+  <style>
+    .room-detail-page .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+    .room-slider-outer { width: 100%; margin-bottom: 2rem; }
+    .room-slider-wrap { position: relative; width: 100%; overflow: hidden; background: var(--bg); aspect-ratio: 21/9; max-height: min(85vh, 720px); touch-action: pan-x; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .room-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; height: 100%; }
+    .room-slider::-webkit-scrollbar { height: 6px; }
+    .room-slider::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
+    .room-slider::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+    .room-slide { flex: 0 0 100%; scroll-snap-align: start; height: 100%; min-height: 0; position: relative; }
+    .room-slide img { width: 100%; height: 100%; display: block; object-fit: contain; object-position: center; cursor: pointer; transition: transform 0.4s ease; background: var(--bg); }
+    .room-slide:hover img { transform: scale(1.02); }
+    .room-slider-wrap .room-slide > div { width: 100%; height: 100%; min-height: 280px; }
+    .room-slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 56px; height: 56px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.95); color: #1a1a1a; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform 0.25s ease, background 0.2s, box-shadow 0.2s; }
+    .room-slider-arrow:hover { background: #fff; box-shadow: 0 8px 28px rgba(0,0,0,0.25); transform: translateY(-50%) scale(1.1); }
+    .room-slider-arrow:active { transform: translateY(-50%) scale(0.98); }
+    .room-slider-prev { left: 24px; }
+    .room-slider-next { right: 24px; }
+    .room-slider-arrow svg { width: 26px; height: 26px; }
+    .room-slider-dots-wrap { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; align-items: center; gap: 10px; padding: 10px 18px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border-radius: 999px; }
+    .room-slider-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); transition: all 0.25s ease; cursor: pointer; }
+    .room-slider-dots span:hover { background: rgba(255,255,255,0.8); transform: scale(1.2); }
+    .room-slider-dots span.active { background: var(--accent); width: 28px; border-radius: 999px; }
+    .room-slider-counter { margin-left: 4px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.95); letter-spacing: 0.02em; }
+    @media (max-width: 768px) {
+      .room-slider-wrap { aspect-ratio: 4/3; max-height: 70vh; }
+      .room-slider-arrow { width: 48px; height: 48px; background: rgba(255,255,255,0.2); color: #fff; box-shadow: none; }
+      .room-slider-arrow:hover { background: rgba(255,255,255,0.35); }
+      .room-slider-prev { left: 12px; }
+      .room-slider-next { right: 12px; }
+    }
+    .room-detail-body { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem 3rem; }
+    .room-detail-title-wrap { margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+    .room-detail-title-wrap .room-detail-title { margin: 0; font-size: clamp(1.6rem, 4vw, 2rem); font-weight: 700; color: var(--text); letter-spacing: -0.03em; }
+    .room-detail-info { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    @media (min-width: 640px) {
+      .room-detail-info { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .room-detail-info { grid-template-columns: repeat(3, 1fr); }
+    }
+    .room-detail-card { background: var(--bg-card); border-radius: 14px; padding: 1.35rem 1.5rem; border: 1px solid var(--border); box-shadow: var(--shadow); transition: box-shadow 0.25s ease, border-color 0.2s ease; }
+    .room-detail-card:hover { box-shadow: var(--shadow-hover); border-color: var(--accent); }
+    .room-detail-card h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.75rem; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+    .room-detail-card h3 .room-detail-card-icon { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; font-size: 1.1rem; background: linear-gradient(135deg, var(--accent), var(--accent-hover)); color: #fff; border-radius: 10px; }
+    .room-detail-card .room-detail-desc { margin: 0; font-size: 1rem; line-height: 1.7; color: var(--text-muted); }
+    .room-detail-capacity-wrap { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg); border-radius: 10px; font-size: 1rem; color: var(--text); border: 1px solid var(--border); }
+    .room-detail-capacity-wrap strong { color: var(--accent); }
+    .room-features-tags { list-style: none; margin: 0.75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .room-features-tags li { background: var(--bg); padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.9rem; color: var(--text-muted); border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s; }
+    .room-features-tags li:hover { border-color: var(--accent); color: var(--text); }
+    .room-cta-wrap { margin: 2rem 0 0; }
+    .room-cta-wrap .btn { padding: 1rem 2rem; font-size: 1.05rem; font-weight: 600; border-radius: 12px; box-shadow: 0 4px 16px rgba(184, 134, 11, 0.3); }
+    .room-cta-wrap .btn:hover { box-shadow: 0 6px 24px rgba(184, 134, 11, 0.4); }
+    .room-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.94); display: none; align-items: center; justify-content: center; padding: 2rem; box-sizing: border-box; backdrop-filter: blur(6px); }
+    .room-lightbox.is-open { display: flex; animation: roomLightboxIn 0.25s ease; }
+    @keyframes roomLightboxIn { from { opacity: 0; } to { opacity: 1; } }
+    .room-lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 80px rgba(0,0,0,0.5); }
+    .room-lightbox-close { position: absolute; top: 1.25rem; right: 1.25rem; width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.15); color: #fff; font-size: 1.5rem; cursor: pointer; line-height: 1; transition: background 0.2s; }
+    .room-lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    .room-lightbox-prev, .room-lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.15); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; }
+    .room-lightbox-prev svg, .room-lightbox-next svg { flex-shrink: 0; width: 28px; height: 28px; }
+    .room-lightbox-prev { left: 1.25rem; }
+    .room-lightbox-next { right: 1.25rem; }
+    .room-lightbox-prev:hover, .room-lightbox-next:hover { background: rgba(255,255,255,0.3); transform: translateY(-50%) scale(1.08); }
+    .room-detail-page .hotel-overview { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="site-nav">
+        <a href="index.html" class="site-brand" aria-label="Toprak Otel"><span class="site-brand-logo-svg"><svg width="620" height="200" viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffd700"/><stop offset="40%" stop-color="#d4af37"/><stop offset="70%" stop-color="#b8860b"/><stop offset="100%" stop-color="#9a7200"/></linearGradient><filter id="logoGlow"><feGaussianBlur stdDeviation="0" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g fill="url(#logoGold)"><polygon points="310,18 314,28 325,28 316,35 319,46 310,40 301,46 304,35 295,28 306,28"/><polygon points="270,22 274,32 285,32 276,39 279,50 270,44 261,50 264,39 255,32 266,32"/><polygon points="350,22 354,32 365,32 356,39 359,50 350,44 341,50 344,39 335,32 346,32"/></g><path d="M220 58 Q310 38 400 58" stroke="url(#logoGold)" stroke-width="2" fill="none"/><text x="310" y="118" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="80" font-weight="700" letter-spacing="0.08em" fill="url(#logoGold)">TOPRAK</text><text x="310" y="168" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="40" font-weight="600" letter-spacing="0.28em" fill="url(#logoGold)">HOTEL</text><line x1="250" y1="182" x2="370" y2="182" stroke="url(#logoGold)" stroke-width="1.8" opacity="0.95"/></svg></span><span class="site-brand-text">Toprak Otel</span></a>
+        <button class="site-nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="site-nav-panel"><span></span><span></span><span></span></button>
+        <div class="site-nav-panel" id="site-nav-panel">
+          <nav class="site-nav-left">
+            <a href="index.html" class="site-link"><span data-i18n="nav.home">Anasayfa</span></a>
+            <a href="odalar.html" class="site-link"><span data-i18n="nav.rooms">Odalar</span></a>
+            <a href="hakkimizda.html" class="site-link"><span data-i18n="nav.about">Hakkımızda</span></a>
+            <a href="galeri.html" class="site-link"><span data-i18n="nav.gallery">Galeri</span></a>
+            <a href="iletisim.html" class="site-link"><span data-i18n="nav.complaints">Şikayet & Öneriler</span></a>
+          </nav>
+          <div class="site-nav-right">
+            <a href="rezervasyon.html" class="site-link is-cta"><span data-i18n="nav.book">Rezervasyon</span></a>
+            <a href="rezervasyon-sorgula.html" class="site-link"><span data-i18n="nav.manageShort">Sorgula</span></a>
+            <div class="site-nav-actions">
+              <div class="lang-dropdown">
+                <button type="button" class="lang-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-label="Dil seçin">TR</button>
+                <div class="lang-dropdown-menu" role="menu">
+                  <button type="button" role="menuitem" data-lang-switch="tr">Türkçe</button>
+                  <button type="button" role="menuitem" data-lang-switch="en">English</button>
+                  <button type="button" role="menuitem" data-lang-switch="fa">فارسی</button>
+                </div>
+              </div>
+              <button class="theme-toggle" aria-label="Tema değiştir">🌙</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <main class="section room-detail-page">
+    <div id="room-content">
+      <p class="section-subtitle" data-i18n="common.loading">Yükleniyor…</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 data-i18n="footer.pages">Sayfalar</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="nav.home">Anasayfa</a></li>
+            <li><a href="odalar.html" data-i18n="nav.rooms">Odalar</a></li>
+            <li><a href="hakkimizda.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li><a href="galeri.html" data-i18n="nav.gallery">Galeri</a></li>
+            <li><a href="iletisim.html" data-i18n="nav.complaints">Şikayet & Öneriler</a></li>
+            <li><a href="rezervasyon.html" data-i18n="nav.book">Rezervasyon Yap</a></li>
+            <li><a href="rezervasyon-sorgula.html" data-i18n="nav.manage">Rezervasyon Sorgula</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.contact">İletişim</h4>
+          <div id="footer-contact"><p data-i18n="common.loading">Yükleniyor…</p></div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.location">Konum</h4>
+          <div id="footer-konum"><p data-i18n="common.loading">Yükleniyor…</p></div>
+        </div>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2025 Toprak Otel. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/hotel-overview.js"></script>
+  <script src="js/oda-detay.js"></script>
+  <script src="js/whatsapp-float.js"></script>
+</body>
+</html>

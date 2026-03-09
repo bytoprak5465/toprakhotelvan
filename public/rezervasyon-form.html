@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Rezervasyonu Tamamla | Toprak Otel - Ödeme ve Kişisel Bilgiler</title>
+  <meta name="description" content="Toprak Otel rezervasyon tamamlama. Seçtiğiniz oda için kişisel bilgilerinizi girin ve ödeme yöntemini seçin. Güvenli rezervasyon formu.">
+  <meta name="keywords" content="Toprak Otel rezervasyon formu, otel ödeme, rezervasyon tamamla">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="http://www.toprakhotelvan.com/rezervasyon-form.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://www.toprakhotelvan.com/rezervasyon-form.html">
+  <meta property="og:title" content="Rezervasyonu Tamamla | Toprak Otel">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Toprak Otel">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=24">
+  <link rel="stylesheet" href="css/rezervasyon.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="site-nav">
+        <a href="index.html" class="site-brand" aria-label="Toprak Otel"><span class="site-brand-logo-svg"><svg width="620" height="200" viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffd700"/><stop offset="40%" stop-color="#d4af37"/><stop offset="70%" stop-color="#b8860b"/><stop offset="100%" stop-color="#9a7200"/></linearGradient><filter id="logoGlow"><feGaussianBlur stdDeviation="0" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g fill="url(#logoGold)"><polygon points="310,18 314,28 325,28 316,35 319,46 310,40 301,46 304,35 295,28 306,28"/><polygon points="270,22 274,32 285,32 276,39 279,50 270,44 261,50 264,39 255,32 266,32"/><polygon points="350,22 354,32 365,32 356,39 359,50 350,44 341,50 344,39 335,32 346,32"/></g><path d="M220 58 Q310 38 400 58" stroke="url(#logoGold)" stroke-width="2" fill="none"/><text x="310" y="118" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="80" font-weight="700" letter-spacing="0.08em" fill="url(#logoGold)">TOPRAK</text><text x="310" y="168" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="40" font-weight="600" letter-spacing="0.28em" fill="url(#logoGold)">HOTEL</text><line x1="250" y1="182" x2="370" y2="182" stroke="url(#logoGold)" stroke-width="1.8" opacity="0.95"/></svg></span><span class="site-brand-text">Toprak Otel</span></a>
+        <button class="site-nav-toggle" type="button" aria-label="Menü" aria-expanded="false" aria-controls="site-nav-panel"><span></span><span></span><span></span></button>
+        <div class="site-nav-panel" id="site-nav-panel">
+          <nav class="site-nav-left">
+            <a href="index.html" class="site-link"><span data-i18n="nav.home">Anasayfa</span></a>
+            <a href="odalar.html" class="site-link"><span data-i18n="nav.rooms">Odalar</span></a>
+            <a href="hakkimizda.html" class="site-link"><span data-i18n="nav.about">Hakkımızda</span></a>
+            <a href="galeri.html" class="site-link"><span data-i18n="nav.gallery">Galeri</span></a>
+            <a href="iletisim.html" class="site-link"><span data-i18n="nav.complaints">Şikayet & Öneriler</span></a>
+          </nav>
+          <div class="site-nav-right">
+            <a href="rezervasyon.html" class="site-link is-cta"><span data-i18n="nav.book">Rezervasyon</span></a>
+            <a href="rezervasyon-sorgula.html" class="site-link"><span data-i18n="nav.manageShort">Sorgula</span></a>
+            <div class="site-nav-actions">
+              <div class="lang-dropdown">
+                <button type="button" class="lang-dropdown-btn" aria-haspopup="true" aria-expanded="false" aria-label="Dil seçin">TR</button>
+                <div class="lang-dropdown-menu" role="menu">
+                  <button type="button" role="menuitem" data-lang-switch="tr">Türkçe</button>
+                  <button type="button" role="menuitem" data-lang-switch="en">English</button>
+                  <button type="button" role="menuitem" data-lang-switch="fa">فارسی</button>
+                </div>
+              </div>
+              <button class="theme-toggle" aria-label="Tema değiştir">🌙</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-nav-overlay" aria-hidden="true"></div>
+  </header>
+
+  <main class="section rezervasyon-form-page">
+    <div class="container rezervasyon-form-container">
+      <h1 class="rezervasyon-form-page-title">Rezervasyonu tamamla</h1>
+      <div id="rezervasyon-form-loading" class="rezervasyon-form-loading">Yükleniyor…</div>
+      <form id="rezervasyon-modal-form" class="rezervasyon-form rezervasyon-form-inline" style="display:none">
+        <input type="hidden" name="roomId" id="rez-form-roomId">
+        <div class="rezervasyon-form-main">
+          <section class="rezervasyon-form-section">
+            <h3 class="rezervasyon-form-section-title">Konuk bilgileri</h3>
+            <div class="rezervasyon-form-row">
+              <div class="rezervasyon-form-group">
+                <label class="rezervasyon-form-label">Ad *</label>
+                <input type="text" name="firstName" class="rezervasyon-form-input" placeholder="Adınız" required>
+              </div>
+              <div class="rezervasyon-form-group">
+                <label class="rezervasyon-form-label">Soyad *</label>
+                <input type="text" name="lastName" class="rezervasyon-form-input" placeholder="Soyadınız" required>
+              </div>
+            </div>
+            <div class="rezervasyon-form-group">
+              <label class="rezervasyon-form-label">E-posta adresi *</label>
+              <input type="email" name="email" class="rezervasyon-form-input" placeholder="ornek@email.com" required>
+            </div>
+            <div class="rezervasyon-form-group">
+              <label class="rezervasyon-form-label">Telefon numarası</label>
+              <input type="tel" name="phone" class="rezervasyon-form-input" placeholder="5XX XXX XX XX">
+            </div>
+          </section>
+          <section class="rezervasyon-form-section">
+            <h3 class="rezervasyon-form-section-title">Özel istekler (isteğe bağlı)</h3>
+            <div class="rezervasyon-form-group">
+              <label class="rezervasyon-form-label">Not</label>
+              <textarea name="note" class="rezervasyon-form-input rezervasyon-form-textarea" rows="3" placeholder="Örn: erken giriş, ekstra yastık..."></textarea>
+            </div>
+          </section>
+          <section class="rezervasyon-form-section rezervasyon-odeme-section">
+            <h3 class="rezervasyon-form-section-title">Ödeme yöntemi</h3>
+            <p class="rezervasyon-odeme-guvenlik">
+              <span class="rezervasyon-odeme-check">✓</span> Güvenli iletim kullanıyoruz<br>
+              <span class="rezervasyon-odeme-check">✓</span> Kişisel bilgilerinizi koruyoruz
+            </p>
+            <div class="rezervasyon-odeme-tabs">
+              <button type="button" class="rezervasyon-odeme-tab" data-payment="card">Kredi / Banka Kartı</button>
+              <button type="button" class="rezervasyon-odeme-tab active" data-payment="transfer">Havale / EFT</button>
+            </div>
+            <div class="rezervasyon-odeme-card-panel" id="rez-odeme-card-panel">
+              <p class="rezervasyon-odeme-logos">Visa · Mastercard · American Express · Troy</p>
+              <div class="rezervasyon-form-group">
+                <label class="rezervasyon-form-label">Kart üzerindeki isim *</label>
+                <input type="text" name="cardName" class="rezervasyon-form-input" placeholder="Kartta yazan isim" autocomplete="cc-name">
+              </div>
+              <div class="rezervasyon-form-group">
+                <label class="rezervasyon-form-label">Kart numarası *</label>
+                <input type="text" name="cardNumber" class="rezervasyon-form-input" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number">
+              </div>
+              <div class="rezervasyon-form-row rezervasyon-odeme-row">
+                <div class="rezervasyon-form-group">
+                  <label class="rezervasyon-form-label">Son kullanma *</label>
+                  <div class="rezervasyon-odeme-expiry">
+                    <select name="cardMonth" class="rezervasyon-form-input rezervasyon-odeme-select" autocomplete="cc-exp-month">
+                      <option value="">Ay</option>
+                      <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option>
+                      <option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                    </select>
+                    <select name="cardYear" class="rezervasyon-form-input rezervasyon-odeme-select" autocomplete="cc-exp-year">
+                      <option value="">Yıl</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="rezervasyon-form-group">
+                  <label class="rezervasyon-form-label">Güvenlik kodu (CVC) *</label>
+                  <input type="text" name="cardCvc" class="rezervasyon-form-input" placeholder="123" maxlength="4" autocomplete="cc-csc">
+                </div>
+              </div>
+              <div class="rezervasyon-form-group">
+                <label class="rezervasyon-form-label">Fatura posta kodu</label>
+                <input type="text" name="billingZip" class="rezervasyon-form-input" placeholder="Posta kodu" autocomplete="postal-code">
+              </div>
+            </div>
+            <div class="rezervasyon-odeme-transfer-panel" id="rez-odeme-transfer-panel" style="display:none">
+              <div id="rez-odeme-iban-box" class="rezervasyon-odeme-iban-box">
+                <p class="rezervasyon-odeme-iban-loading">Yükleniyor…</p>
+              </div>
+            </div>
+          </section>
+          <div id="rez-form-mesaj" class="rezervasyon-form-mesaj" style="display:none"></div>
+          <button type="submit" class="rezervasyon-form-submit">Rezervasyonu tamamla</button>
+        </div>
+        <aside class="rezervasyon-form-summary">
+          <div class="rezervasyon-summary-card">
+            <div class="rezervasyon-summary-image-wrap" id="rez-summary-image-wrap">
+              <button type="button" class="rez-summary-img-nav rez-summary-img-prev" id="rez-summary-image-prev" aria-label="Önceki görsel">‹</button>
+              <button type="button" class="rez-summary-img-nav rez-summary-img-next" id="rez-summary-image-next" aria-label="Sonraki görsel">›</button>
+              <img id="rez-summary-image" src="" alt="" class="rezervasyon-summary-image">
+              <div class="rez-summary-img-dots" id="rez-summary-image-dots"></div>
+            </div>
+            <h3 class="rezervasyon-summary-title">Konaklama özeti</h3>
+            <p class="rezervasyon-summary-room" id="rez-modal-room-name"></p>
+            <div id="rez-summary-combo-lines" class="rezervasyon-summary-combo-lines" style="display:none"></div>
+            <div class="rezervasyon-summary-dates">
+              <h4 class="rezervasyon-summary-subtitle">Rezervasyon tarihi</h4>
+              <dl class="rezervasyon-summary-dl">
+                <dt>Giriş</dt>
+                <dd id="rez-summary-checkin">—</dd>
+                <dt>Çıkış</dt>
+                <dd id="rez-summary-checkout">—</dd>
+                <dt>Konaklama</dt>
+                <dd id="rez-summary-nights">—</dd>
+                <dt>Oda / Misafir</dt>
+                <dd id="rez-summary-guests">—</dd>
+              </dl>
+            </div>
+            <div class="rezervasyon-summary-price" id="rezervasyon-summary-price-block">
+              <h4 class="rezervasyon-summary-subtitle">Rezervasyon tutarı</h4>
+              <div class="rezervasyon-summary-price-rows">
+                <div class="rezervasyon-summary-price-row"><span id="rez-summary-price-detail">—</span><span id="rez-summary-price-amount">—</span></div>
+                <div class="rezervasyon-summary-price-avg" id="rez-summary-price-avg"></div>
+              </div>
+              <div class="rezervasyon-summary-price-total">
+                <span>Toplam</span>
+                <strong id="rez-summary-total">—</strong>
+              </div>
+            </div>
+            <input type="hidden" name="checkIn" id="rez-form-checkin">
+            <input type="hidden" name="checkOut" id="rez-form-checkout">
+            <input type="hidden" name="guests" id="rez-form-guests" value="2">
+            <input type="hidden" name="roomCount" id="rez-form-roomCount" value="1">
+            <input type="hidden" name="adults" id="rez-form-adults" value="2">
+            <input type="hidden" name="childrenUnder6" id="rez-form-childrenUnder6" value="0">
+            <input type="hidden" name="children6Plus" id="rez-form-children6Plus" value="0">
+            <p class="rezervasyon-summary-note">Ödeme tesiste alınacaktır. Rezervasyon talebiniz onaylandıktan sonra e-posta ile bilgilendirileceksiniz.</p>
+            <p class="rezervasyon-summary-policy">İptal koşulları rezervasyon onayında bildirilecektir.</p>
+          </div>
+        </aside>
+      </form>
+      <div id="rezervasyon-success-panel" class="rezervasyon-success-panel" style="display:none">
+        <div class="rezervasyon-success-icon">✓</div>
+        <h2 class="rezervasyon-success-title">Rezervasyonunuz alındı</h2>
+        <p class="rezervasyon-success-mesaj">Rezervasyon numaranızı not alın. Bu numara ve e-posta adresinizle rezervasyonunuzu sorgulayabilir, PDF indirebilir veya iptal edebilirsiniz.</p>
+        <div class="rezervasyon-success-no">
+          <span class="rezervasyon-success-label">Rezervasyon numarası</span>
+          <strong id="rez-success-no" class="rezervasyon-success-code">—</strong>
+        </div>
+        <div id="rez-success-iban-box" class="rezervasyon-odeme-iban-box" style="display:none"></div>
+        <div class="rezervasyon-success-actions">
+          <a id="rez-success-pdf" href="#" target="_blank" rel="noopener" class="btn btn-primary">PDF indir</a>
+          <a id="rez-success-manage" href="rezervasyon-sorgula.html" class="btn btn-outline">Rezervasyonumu yönet</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4 data-i18n="footer.pages">Sayfalar</h4>
+          <ul>
+            <li><a href="index.html" data-i18n="nav.home">Anasayfa</a></li>
+            <li><a href="odalar.html" data-i18n="nav.rooms">Odalar</a></li>
+            <li><a href="hakkimizda.html" data-i18n="nav.about">Hakkımızda</a></li>
+            <li><a href="galeri.html" data-i18n="nav.gallery">Galeri</a></li>
+            <li><a href="iletisim.html" data-i18n="nav.complaints">Şikayet & Öneriler</a></li>
+            <li><a href="rezervasyon.html" data-i18n="nav.book">Rezervasyon Yap</a></li>
+            <li><a href="rezervasyon-sorgula.html" data-i18n="nav.manage">Rezervasyon Sorgula</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.contact">İletişim</h4>
+          <div id="footer-contact"><p data-i18n="common.loading">Yükleniyor…</p></div>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.location">Konum</h4>
+          <div id="footer-konum"><p data-i18n="common.loading">Yükleniyor…</p></div>
+        </div>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2025 Toprak Otel. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/footer.js"></script>
+  <script src="js/rezervasyon-form.js"></script>
+  <script src="js/whatsapp-float.js"></script>
+</body>
+</html>
